@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import './styles.css'
 import Header from './components/Header.tsx' 
-import ReactSlider from 'react-slider'
 function App() {
     return (
         <>
@@ -14,7 +13,7 @@ function App() {
 
 function Mat() {
     const [run, setRun] = useState(false)
-    const [time, setTime] = useState(200)
+    const [time] = useState(200)
     const [tick, setTick] = useState(false)
     const [mat, setMat] = useState(
         [
