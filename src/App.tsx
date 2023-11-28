@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import './styles.css'
 import Header from './components/Header.tsx' 
-
+import ReactSlider from 'react-slider'
 function App() {
     return (
         <>
@@ -13,13 +13,8 @@ function App() {
 }
 
 function Mat() {
-//const [style, setStyle] = useState(Array<Array<string>>)
-//let future = new Array(style.length)
-//for(let i = 0; i < style.length; i++) {
-    //future[i] = new Array(style.length).fill("dead")
-//}
-//setStyle(future);
     const [run, setRun] = useState(false)
+    const [time, setTime] = useState(200)
     const [tick, setTick] = useState(false)
     const [mat, setMat] = useState(
         [
@@ -47,25 +42,15 @@ function Mat() {
         ]
     )   
 
-    function loadMat() {
-        let temp = mat
-        setMat(temp)
-    }
     useEffect(() => {
         if (run) {
             const interval = setInterval(() => {
                 handleMat() 
-            }, 200)
+            }, time)
             console.log(run);
             return () => clearInterval(interval);
-        } else {
-            loadMat()
-            // const interval = setInterval(() => {
-            //     console.log()
-            // }, 250)
-            // console.log(run);
-            // return () => clearInterval(interval);
-        }
+        } 
+
     }, [mat,run, tick]);
 
 
@@ -111,12 +96,7 @@ function Mat() {
         let temp = mat
         temp[i][j] = mat[i][j] == 1 ? 0 : 1
         setMat(temp)
-        console.log(mat[i][j]);
-        console.log(temp[i][j]);
-        setMat(temp)
         setTick(a => !a)
-        console.log(mat);
-        
     } 
 
     const listMap = mat.map((row, ind) => 
@@ -130,7 +110,7 @@ function Mat() {
                         className={square === 1 ? "alive" : "dead"}
                         onClick={() => {changeSquare(ind, ind2)}}
                     >
-                        {square} 
+                        A. 
                     </button>
                 )
             }
@@ -140,10 +120,15 @@ function Mat() {
     return (
         <>
             {listMap}
+            <br></br>
             <button
                 onClick = {change}
             >
-                Toggle 
+                { run ? (
+                    <>Stop Running</>
+                ) : (
+                        <>Start Running</>
+                    )} 
             </button>
         </>
     )
