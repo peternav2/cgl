@@ -1,0 +1,12 @@
+.alive {
+    color: teal;
+    background-color: teal;
+    border-style:solid;
+    border-color:black;
+}
+.dead {
+    color: grey;
+    background-color: grey;
+    border-style:solid;
+    border-color:black;
+}
